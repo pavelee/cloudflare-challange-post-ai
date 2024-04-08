@@ -1,6 +1,8 @@
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
+export const runtime = 'edge';
+
 export const GET = (request: NextRequest) => {
   const cook = cookies();
   const time = new Date().getTime();
