@@ -6,7 +6,7 @@ type PokemonProps = {
   pokemon: string;
 }
 
-export const Pokemon = (props: PokemonProps) => {
+const Pokemon = (props: PokemonProps) => {
   const { pokemon } = props;
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -23,7 +23,7 @@ export const Pokemon = (props: PokemonProps) => {
   );
 }
 
-export const PokemonDesc = async (props: PokemonProps) => {
+const PokemonDesc = async (props: PokemonProps) => {
   const { pokemon } = props;
   const res = await askAI(`Describe pokemon: ${pokemon}`);
   return <p>{res}</p>
