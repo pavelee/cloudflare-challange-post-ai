@@ -2,6 +2,8 @@ import Image from "next/image";
 import { askAI } from "./action/askAI";
 import { Suspense } from "react";
 
+export const runtime = 'edge';
+
 type PokemonProps = {
   pokemon: string;
 }
