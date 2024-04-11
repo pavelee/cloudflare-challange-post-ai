@@ -13,7 +13,7 @@ export const GET = async (request: NextRequest) => {
   const prompt = searchParams.get("prompt") ?? "spiderman";
 
   const req = await fetch(
-    `https://api.cloudflare.com/client/v4/accounts/${cfAccountId}/ai/run/@cf/lykon/dreamshaper-8-lcm`,
+    `https://api.cloudflare.com/client/v4/accounts/${cfAccountId}/ai/run/@cf/stabilityai/stable-diffusion-xl-base-1.0`,
     {
       method: "POST",
       body: JSON.stringify({
