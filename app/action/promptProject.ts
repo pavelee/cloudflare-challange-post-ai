@@ -1,7 +1,7 @@
 import next from "next";
 import { askAI } from "./askAI";
-import { getProject } from "./getProjectCode";
-import { saveProjectCode } from "./saveProjectCode";
+import { getProject } from "./getProject";
+import { saveProject } from "./saveProject";
 
 export const promptProject = async (projectId: string, prompt: string) => {
   const code = await getProject(projectId);
@@ -13,7 +13,7 @@ export const promptProject = async (projectId: string, prompt: string) => {
   );
 
   // @TODO remove
-  await saveProjectCode(projectId, response);
+  await saveProject(projectId, response);
 
   return response;
 };

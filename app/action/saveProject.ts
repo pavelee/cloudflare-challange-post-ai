@@ -1,6 +1,6 @@
 import { storage } from "../_config/storage";
 
-export const saveProjectCode = async (
+export const saveProject = async (
   projectID: string,
   sourceCode: string
 ) => {
