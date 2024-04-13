@@ -25,6 +25,5 @@ export const buildPrompt = (prompt: string, code?: string) => {
   }
   nextPrompt += prompt;
   nextPrompt += `Return only HTML code, do not add any comments or explanations.`;
-  nextPrompt += `minify the code and remove all comments. Make sure it is as small as possible.`;
   return nextPrompt;
 };
