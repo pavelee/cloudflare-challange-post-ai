@@ -1,8 +1,7 @@
 import { cookies, headers } from "next/headers";
 import { NextRequest } from "next/server";
 
-export const runtime =
-  process.env.NODE_ENV === "production" ? "edge" : undefined;
+export const runtime = 'edge';
 
 export const GET = async (request: NextRequest) => {
   const cook = cookies();

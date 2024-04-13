@@ -1,7 +1,6 @@
 import { Project } from "../component/project/Project";
 
-export const runtime =
-  process.env.NODE_ENV === "production" ? "edge" : undefined;
+export const runtime = 'edge';
 
 type ProjectPageProps = {
     params: {
