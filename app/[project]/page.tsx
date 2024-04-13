@@ -5,9 +5,9 @@ type ProjectPageProps = {
     }
 }
 
-const ProjectPage = (props: ProjectPageProps) => {
+const ProjectPage = async (props: ProjectPageProps) => {
     const { project } = props.params;
-    console.log(project);
+
     return (
         <div>
             <h1>Project Page</h1>
