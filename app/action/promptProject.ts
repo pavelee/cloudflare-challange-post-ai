@@ -1,10 +1,10 @@
 import next from "next";
 import { askAI } from "./askAI";
-import { getProjectCode } from "./getProjectCode";
+import { getProject } from "./getProjectCode";
 import { saveProjectCode } from "./saveProjectCode";
 
 export const promptProject = async (projectId: string, prompt: string) => {
-  const code = await getProjectCode(projectId);
+  const code = await getProject(projectId);
   let finalPrompt = buildPrompt(prompt, code);
 
   const response = await askAI(
