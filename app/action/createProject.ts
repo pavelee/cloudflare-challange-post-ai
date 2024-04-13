@@ -1,4 +1,5 @@
 import { storage } from "../_config/storage";
+import { ProjectFactory } from "../_factory/ProjectFactory";
 import { Project } from "../_model/Project";
 import { generateProjectID } from "../util/generateProjectID";
 import { saveProject } from "./saveProject";
@@ -15,5 +16,5 @@ export const createProject = async (projectName: string): Promise<Project> => {
   const projectID = generateProjectID(projectName);
   const project = new Project(projectID, "");
   await saveProject(project);
-  return new Project(projectID, "");
+  return ProjectFactory.createFromObject(project.toObject());
 };
