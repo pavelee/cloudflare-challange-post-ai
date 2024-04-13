@@ -55,7 +55,7 @@ const AIAssistantChat = (
 }
 
 export const PromptForm = (props: PromptFormProps) => {
-    const [isBuilderChatOpen, setIsBuilderChatOpen] = useState<boolean>(false);
+    const [isBuilderChatOpen, setIsBuilderChatOpen] = useState<boolean>(true);
 
     const openBuilderChat = () => {
         setIsBuilderChatOpen(true);
