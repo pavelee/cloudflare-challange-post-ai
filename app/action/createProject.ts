@@ -12,7 +12,7 @@ import { generateProjectID } from "../util/generateProjectID";
  */
 export const createProject = async (
   projectName: string,
-  projectsDir: string
+  projectsDir: string = './app/projects'
 ) => {
   const projectID = generateProjectID(projectName);
 

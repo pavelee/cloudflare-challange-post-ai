@@ -2,6 +2,7 @@ import Image from "next/image";
 import { askAI } from "./action/askAI";
 import { Suspense } from "react";
 import { Form } from "./component/Form";
+import { createProject } from "./action/createProject";
 
 export const runtime = 'edge';
 
@@ -38,7 +39,7 @@ const AIComponent = async (props: PokemonProps) => {
   // prompt = ` ${pokemon}. Add inline css styles. Return only changed HTML code.`
   prompt += ` ${pokemon}. Add only inline css. Return only changed HTML code, do not add any comments or explanations.`
   const res = await askAI(prompt, '@hf/thebloke/openhermes-2.5-mistral-7b-awq');
-  console.log(res); 
+  console.log(res);
   return <div className="flex flex-col gap-4">
     <div
       dangerouslySetInnerHTML={{ __html: res }}
@@ -66,7 +67,7 @@ export default async function Home(props: HomeProps) {
     <main className="flex min-h-screen flex-col items-center gap-8 p-24">
       <Form />
       <Suspense fallback={<div>Loading...</div>}>
-        <AIComponent pokemon={pokemon} />
+        {/* <AIComponent pokemon={pokemon} /> */}
       </Suspense>
     </main>
   );
