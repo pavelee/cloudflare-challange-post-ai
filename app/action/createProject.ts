@@ -1,5 +1,7 @@
 import { storage } from "../_config/storage";
+import { Project } from "../_model/Project";
 import { generateProjectID } from "../util/generateProjectID";
+import { saveProject } from "./saveProject";
 
 /**
  * function that will create project ID and coresponding file with project's source code on the disk
@@ -9,8 +11,9 @@ import { generateProjectID } from "../util/generateProjectID";
  * @param projectName name of the project
  * @param projectsDir directory where projects will be saved
  */
-export const createProject = async (projectName: string) => {
+export const createProject = async (projectName: string): Promise<Project> => {
   const projectID = generateProjectID(projectName);
-  await storage.set(projectID, "");
-  return projectID;
+  const project = new Project(projectID, "");
+  await saveProject(project);
+  return new Project(projectID, "");
 };

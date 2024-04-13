@@ -4,16 +4,18 @@ import { getProject } from "./getProject";
 import { saveProject } from "./saveProject";
 
 export const promptProject = async (projectId: string, prompt: string) => {
-  const code = await getProject(projectId);
-  let finalPrompt = buildPrompt(prompt, code);
+  const project = await getProject(projectId);
+  let finalPrompt = buildPrompt(prompt, project.getSourceCode());
 
   const response = await askAI(
     finalPrompt,
     "@hf/thebloke/openhermes-2.5-mistral-7b-awq"
   );
 
+  project.setSourceCode(response);
+
   // @TODO remove
-  await saveProject(projectId, response);
+  await saveProject(project);
 
   return response;
 };

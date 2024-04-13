@@ -10,6 +10,14 @@ export class Project {
     return this.id;
   }
 
+  getSourceCode(): string {
+    return this.sourceCode;
+  }
+
+  setSourceCode(sourceCode: string): void {
+    this.sourceCode = sourceCode;
+  }
+
   toObject(): ProjectType {
     return {
       id: this.id,

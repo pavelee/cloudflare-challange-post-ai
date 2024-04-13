@@ -18,7 +18,7 @@ const getProject = async (projectId: string) => {
 
 const getProjectCode = async (projectId: string) => {
     const project = await getProject(projectId);
-    return project.code;
+    return project.sourceCode;
 }
 
 const promptProject = async (projectId: string, prompt: string) => {

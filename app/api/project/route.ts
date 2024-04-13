@@ -20,9 +20,7 @@ export const GET = async (req: NextRequest) => {
 
   const project = await getProject(projectID);
 
-  return NextResponse.json({
-    code: project,
-  });
+  return NextResponse.json(project.toObject());
 };
 
 export const POST = async (req: NextRequest) => {
@@ -30,7 +28,5 @@ export const POST = async (req: NextRequest) => {
 
   const project = await createProject(projectName);
 
-  return NextResponse.json({
-    projectID: project,
-  });
+  return NextResponse.json(project.toObject());
 };

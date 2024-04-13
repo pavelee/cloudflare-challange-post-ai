@@ -17,7 +17,7 @@ export const Form = () => {
 
     const onCreateProject = async () => {
         const project = await API.createProject("my-project");
-        router.push(`/${project.projectID}`);
+        router.push(`/${project.id}`);
     };
 
     return (

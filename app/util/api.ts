@@ -3,7 +3,8 @@ type getProjectIn = {
 };
 
 type getProjectOut = {
-  code: string;
+  id: string;
+  sourceCode: string;
 };
 
 type promptProjectIn = {
