@@ -1,10 +1,6 @@
-import fs from "fs";
+import { storage } from "../_config/storage";
 
 export const getProjectCode = async (projectID: string) => {
-  const projectDir = `./app/projects/${projectID}`;
-  const sourceCode = fs.readFileSync(`${projectDir}/index.html`, {
-    encoding: "utf-8",
-  });
-
+  const sourceCode = await storage.get(projectID);
   return sourceCode;
 };

@@ -1,5 +1,4 @@
-import fs from "fs";
-import { generateSalt } from "../util/generateSalt";
+import { storage } from "../_config/storage";
 import { generateProjectID } from "../util/generateProjectID";
 
 /**
@@ -10,21 +9,8 @@ import { generateProjectID } from "../util/generateProjectID";
  * @param projectName name of the project
  * @param projectsDir directory where projects will be saved
  */
-export const createProject = async (
-  projectName: string,
-  projectsDir: string = './app/projects'
-) => {
+export const createProject = async (projectName: string) => {
   const projectID = generateProjectID(projectName);
-
-  const projectDir = `${projectsDir}/${projectID}`;
-  if (!fs.existsSync(projectDir)) {
-    fs.mkdirSync(projectDir);
-  } else {
-    throw new Error("Project already exists");
-  }
-
-  const sourceCode = ``;
-
-  fs.writeFileSync(`${projectDir}/index.html`, sourceCode);
+  await storage.set(projectID, "");
   return projectID;
 };

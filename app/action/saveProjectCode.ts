@@ -1,9 +1,8 @@
-import fs from "fs";
+import { storage } from "../_config/storage";
 
 export const saveProjectCode = async (
   projectID: string,
   sourceCode: string
 ) => {
-  const file = `./app/projects/${projectID}/index.html`;
-  fs.writeFileSync(file, sourceCode);
+  await storage.set(projectID, sourceCode);
 };

@@ -2,7 +2,6 @@ import Image from "next/image";
 import { askAI } from "./action/askAI";
 import { Suspense } from "react";
 import { Form } from "./component/Form";
-import { createProject } from "./action/createProject";
 
 export const runtime = 'edge';
 
