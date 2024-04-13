@@ -1,3 +1,4 @@
+import next from "next";
 import { askAI } from "./askAI";
 import { getProjectCode } from "./getProjectCode";
 import { saveProjectCode } from "./saveProjectCode";
@@ -24,5 +25,6 @@ export const buildPrompt = (prompt: string, code?: string) => {
   }
   nextPrompt += prompt;
   nextPrompt += `Return only HTML code, do not add any comments or explanations.`;
+  nextPrompt += `minify the code and remove all comments. Make sure it is as small as possible.`;
   return nextPrompt;
 };
