@@ -1,6 +1,8 @@
 import { promptProject } from "@/app/action/promptProject";
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 export const POST = async (request: NextRequest) => {
   const { projectId, prompt } = await request.json();
 

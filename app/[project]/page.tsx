@@ -1,5 +1,7 @@
 import { Project } from "../component/project/Project";
 
+export const runtime = "edge";
+
 type ProjectPageProps = {
     params: {
         project: string;

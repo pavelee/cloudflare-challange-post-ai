@@ -2,6 +2,8 @@ import { createProject } from "@/app/action/createProject";
 import { getProjectCode } from "@/app/action/getProjectCode";
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const projectID = searchParams.get("projectID");
