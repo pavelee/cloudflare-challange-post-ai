@@ -39,7 +39,7 @@ const AIAssistantChat = (
                     </div>
                 </div>
                 <div className="space-y-4 flex flex-col items-center">
-                    <Select className="w-full">
+                    <Select className="w-full" value="1">
                         <Select.Option value="1">Section 1</Select.Option>
                     </Select>
                     <Input.TextArea onChange={(value) => {
