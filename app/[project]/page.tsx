@@ -12,7 +12,7 @@ const ProjectPage = async (props: ProjectPageProps) => {
     const { project } = props.params;
 
     return (
-        <div className="flex flex-col ga-8 p-5">
+        <div className="flex flex-col p-2">
             <Project projectId={project} />
         </div>
     );

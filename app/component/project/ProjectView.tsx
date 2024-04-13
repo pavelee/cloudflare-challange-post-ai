@@ -18,9 +18,12 @@ export const ProjectView = (
     return (
         <div>
             <div
-                className="border p-5"
+                className="hover:outline hover:cursor-pointer"
                 dangerouslySetInnerHTML={{ __html: code }}
             ></div>
+            <div className="flex justify-center p-5 animate-pulse">
+                <Button type="primary">Add next section</Button>
+            </div>
         </div>
     )
 
