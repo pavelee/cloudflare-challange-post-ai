@@ -1,5 +1,5 @@
 import { createProject } from "@/app/action/createProject";
-import { getProjectCode } from "@/app/action/getProjectCode";
+import { getProject } from "@/app/action/getProject";
 // import { getProjectCode } from "@/app/action/getProjectCode";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -18,7 +18,7 @@ export const GET = async (req: NextRequest) => {
     );
   }
 
-  const project = await getProjectCode(projectID);
+  const project = await getProject(projectID);
 
   return NextResponse.json({
     code: project,

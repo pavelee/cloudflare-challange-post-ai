@@ -51,14 +51,15 @@ export const Project = (
     }, [props.projectId]);
 
     return (
-        <div className="flex flex-col gap-8 p-5">
-            <h1>Project</h1>
-            <PromptForm projectId={props.projectId}
+        <div className="min-h-screen flex flex-col">
+            <PromptForm
                 onPromptProject={onPromptProject}
             />
-            <ProjectView projectId={props.projectId}
-                code={project}
-            />
+            <div className="grow">
+                <ProjectView projectId={props.projectId}
+                    code={project}
+                />
+            </div>
         </div>
     );
 }
