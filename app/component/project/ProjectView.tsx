@@ -25,7 +25,6 @@ export const ProjectView = (
     const [project, setProject] = useState<any | null>(null);
 
     useEffect(() => {
-        console.log(props.projectId);
         const fetchProject = async () => {
             const code = await getProjectCode(props.projectId);
             setProject(code);
