@@ -1,4 +1,4 @@
-import { Button, Drawer, FloatButton, Input } from "antd";
+import { Button, Drawer, FloatButton, Input, Select } from "antd";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -39,6 +39,9 @@ const AIAssistantChat = (
                     </div>
                 </div>
                 <div className="space-y-4 flex flex-col items-center">
+                    <Select className="w-full">
+                        <Select.Option value="1">Section 1</Select.Option>
+                    </Select>
                     <Input.TextArea onChange={(value) => {
                         console.log(value.target.value);
                         setCurrentMessage(value.target.value);
