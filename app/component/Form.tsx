@@ -7,13 +7,13 @@ import { Button, FloatButton, Input, Result } from "antd";
 export const Form = () => {
     const router = useRouter();
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        const prompt = form.elements.namedItem("prompt") as HTMLInputElement;
-        const value = prompt.value;
-        router.push(`/?pokemon=${value}`);
-    };
+    // const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     const form = e.currentTarget;
+    //     const prompt = form.elements.namedItem("prompt") as HTMLInputElement;
+    //     const value = prompt.value;
+    //     router.push(`/?pokemon=${value}`);
+    // };
 
     const onCreateProject = async () => {
         const project = await API.createProject("my-project");
