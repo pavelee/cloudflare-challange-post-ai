@@ -25,9 +25,7 @@ export const GET = async (request: NextRequest) => {
     }
   );
   const res = await req.blob();
-
-  console.log(res);
-
+  
   return new Response(res, {
     headers: {
       "Content-Type": "image/jpeg",
