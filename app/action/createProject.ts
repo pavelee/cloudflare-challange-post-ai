@@ -1,4 +1,5 @@
 import fs from "fs";
+import { generateSalt } from "../util/generateSalt";
 
 /**
  * function that will create project ID and coresponding file with project's source code on the disk
@@ -25,10 +26,6 @@ export const createProject = async (
 
   fs.writeFileSync(`${projectDir}/index.html`, sourceCode);
   return projectID;
-};
-
-const generateSalt = () => {
-  return Math.random().toString(36).substring(7);
 };
 
 const generateProjectID = (projectName: string) => {
