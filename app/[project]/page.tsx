@@ -1,5 +1,4 @@
-import { ProjectView } from "../component/project/ProjectView";
-import { PromptForm } from "../component/project/PromptForm";
+import { Project } from "../component/project/Project";
 
 type ProjectPageProps = {
     params: {
@@ -12,9 +11,7 @@ const ProjectPage = async (props: ProjectPageProps) => {
 
     return (
         <div className="flex flex-col ga-8 p-5">
-            <h1>Project Page</h1>
-            <PromptForm projectId={project} />
-            <ProjectView projectId={project} />
+            <Project projectId={project} />
         </div>
     );
 }

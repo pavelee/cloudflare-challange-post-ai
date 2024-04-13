@@ -5,34 +5,13 @@ import { use, useEffect, useState } from "react";
 
 type ProjectViewProps = {
     projectId: string;
-}
-
-const getProject = async (projectId: string) => {
-    const project = await API.getProject({
-        projectId
-    });
-    return project;
-}
-
-const getProjectCode = async (projectId: string) => {
-    const project = await getProject(projectId);
-    return project.code;
+    code: string;
 }
 
 export const ProjectView = (
     props: ProjectViewProps
 ) => {
-    const [project, setProject] = useState<any | null>(null);
-
-    useEffect(() => {
-        const fetchProject = async () => {
-            const code = await getProjectCode(props.projectId);
-            setProject(code);
-        };
-
-        fetchProject();
-    }, [props.projectId]);
-
+    const { projectId, code } = props;
 
     return (
         <div className="space-y-5 border p-5">
@@ -40,10 +19,10 @@ export const ProjectView = (
             <p className="text-gray-500">{props.projectId}</p>
             <div
                 className="border p-5"
-                dangerouslySetInnerHTML={{ __html: project }}
+                dangerouslySetInnerHTML={{ __html: code }}
             ></div>
             <pre className="border p-5 bg-gray-100">
-                <code className="text-sm font-mono">{project}</code>
+                <code className="text-sm font-mono">{code}</code>
             </pre>
         </div>
     );
