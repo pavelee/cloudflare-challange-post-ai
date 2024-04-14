@@ -7,30 +7,47 @@ type Models =
   | "@hf/thebloke/deepseek-coder-6.7b-base-awq"
   | "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
 
-export const askAI = async (prompt: any, model: Models = defaultModel) => {
+export type BasicPrompt = {
+  prompt: string;
+  max_tokens?: number;
+};
+
+export type ChatPrompt = {
+  messages: { role: string; content: string }[];
+};
+
+export type Prompt = BasicPrompt | ChatPrompt;
+
+export const buildUrl = (accountId: string, model: Models) => {
+  return `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/run/${model}`;
+};
+
+export const askAI = async (prompt: Prompt, model: Models = defaultModel) => {
   const cloudfrareKey = process.env.CLOUDFLARE_API_KEY;
   const cfAccountId = process.env.CLOUDFLARE_ACCOUNT_ID;
 
-  const input = {
-    max_tokens: 580,
-    prompt: prompt,
-  };
+  if (!cloudfrareKey) {
+    throw new Error("CLOUDFLARE_API_KEY is not set in .env file");
+  }
 
-  // @TODO FIX IT
-  const p = prompt;
+  if (!cfAccountId) {
+    throw new Error("CLOUDFLARE_ACCOUNT_ID is not set in .env file");
+  }
 
-  const req = await fetch(
-    `https://api.cloudflare.com/client/v4/accounts/${cfAccountId}/ai/run/${model}`,
-    {
-      method: "POST",
-      body: JSON.stringify(p),
-      headers: {
-        Authorization: `Bearer ${cloudfrareKey}`,
-      },
+  if ("prompt" in prompt) {
+    if (!prompt.max_tokens) {
+      prompt.max_tokens = 580;
     }
-  );
+  }
+
+  const req = await fetch(buildUrl(cfAccountId, model), {
+    method: "POST",
+    body: JSON.stringify(prompt),
+    headers: {
+      Authorization: `Bearer ${cloudfrareKey}`,
+    },
+  });
   const res = await req.json();
-  console.log(res);
   const response = res.result.response;
 
   return response;

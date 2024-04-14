@@ -8,7 +8,9 @@ export const promptProject = async (projectId: string, prompt: string) => {
   let finalPrompt = buildPrompt(prompt, project.getSourceCode());
 
   const response = await askAI(
-    finalPrompt,
+    {
+      prompt: finalPrompt,
+    },
     "@hf/thebloke/openhermes-2.5-mistral-7b-awq"
   );
 
