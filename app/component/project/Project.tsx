@@ -6,6 +6,7 @@ import { PromptForm } from "./PromptForm";
 import { useEffect, useState } from "react";
 import { AIAssistantChat } from "./AIConsultantChat";
 import { Spin } from "antd";
+import { Models, availableModels, defaultModel } from "@/app/action/askAI";
 
 type ProjectProps = {
     projectId: string;
@@ -31,8 +32,8 @@ const promptProject = async (projectId: string, prompt: string) => {
     return code.code;
 }
 
-const chatProject = async (projectId: string, prompt: string) => {
-    return await API.chatProject(projectId, prompt);
+const chatProject = async (projectId: string, prompt: string, model: Models) => {
+    return await API.chatProject(projectId, prompt, model);
 }
 
 export const Project = (
@@ -46,6 +47,8 @@ export const Project = (
     const [content, setContent] = useState("");
     const [isEdit, setIsEdit] = useState(false);
     const [switchToPreviewAfterSave, setSwitchToPreviewAfterSave] = useState(true);
+    const [model, setModel] = useState<Models>(defaultModel);
+    const [models, setModels] = useState<Models[]>(availableModels);
 
     const openAIConsultantChat = () => {
         setIsAIConsultantChatOpen(true);
@@ -63,7 +66,7 @@ export const Project = (
 
     const onChatProject = async (prompt: string) => {
         setIsSendingMessage(true);
-        const project = await chatProject(props.projectId, prompt);
+        const project = await chatProject(props.projectId, prompt, model);
         if (!project) return;
         setProject(project);
         setIsSendingMessage(false);
@@ -107,6 +110,9 @@ export const Project = (
                 onClose={closeAIConsultantChat}
                 onChatProject={onChatProject}
                 isSendingMessage={isSendingMessage}
+                models={models}
+                model={model}
+                setModel={setModel}
             />
             <PromptForm
                 onPromptProject={onPromptProject}

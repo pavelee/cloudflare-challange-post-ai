@@ -1,8 +1,8 @@
-import { askAI } from "./askAI";
+import { Models, askAI } from "./askAI";
 import { getProject } from "./getProject";
 import { saveProject } from "./saveProject";
 
-export const chatProject = async (projectId: string, prompt: string) => {
+export const chatProject = async (projectId: string, prompt: string, model: Models) => {
   const project = await getProject(projectId);
   // const messages = project.getMessages();
   project.addUserMessage(prompt);
@@ -19,7 +19,7 @@ export const chatProject = async (projectId: string, prompt: string) => {
     messages: finalPrompt,
   };
 
-  const response = await askAI(p);
+  const response = await askAI(p, model);
 
   project.addSystemMessage(response);
 

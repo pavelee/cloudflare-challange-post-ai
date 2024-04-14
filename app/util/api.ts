@@ -1,3 +1,5 @@
+import { Models } from "../action/askAI";
+
 type getProjectIn = {
   projectId: string;
 };
@@ -67,13 +69,13 @@ export class API {
     return await response.json();
   }
 
-  static async chatProject(projectId: string, prompt: string) {
+  static async chatProject(projectId: string, prompt: string, model: Models) {
     const response = await fetch(`/api/project/${projectId}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify({ prompt, model }),
     });
     return response.json();
   }

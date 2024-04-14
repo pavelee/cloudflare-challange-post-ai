@@ -1,13 +1,17 @@
-"use server";
-
 import { AIModelUrl } from "../util/cf/AIModelUrl";
-
-const defaultModel = "@cf/meta/llama-2-7b-chat-fp16";
 
 export type Models =
   | "@cf/meta/llama-2-7b-chat-fp16"
   | "@hf/thebloke/deepseek-coder-6.7b-base-awq"
   | "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
+
+export const availableModels: Models[] = [
+  "@cf/meta/llama-2-7b-chat-fp16",
+  "@hf/thebloke/deepseek-coder-6.7b-base-awq",
+  "@hf/thebloke/openhermes-2.5-mistral-7b-awq",
+];
+
+export const defaultModel = "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
 
 export type BasicPrompt = {
   prompt: string;
