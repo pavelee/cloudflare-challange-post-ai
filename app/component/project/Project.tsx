@@ -86,7 +86,6 @@ export const Project = (
 
     useEffect(() => {
         if (project) {
-            console.log(project.models.chatModel);
             setModel(project.models.chatModel);
         }
     }, [project])
