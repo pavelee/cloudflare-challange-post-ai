@@ -8,7 +8,7 @@ type getProjectIn = {
 type getProjectOut = ProjectType;
 
 type saveProjectIn = {
-  sourceCode?: string;
+  content?: string;
   chatModel?: Models;
 };
 

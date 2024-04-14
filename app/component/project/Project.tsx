@@ -76,7 +76,7 @@ export const Project = (
     const saveProject = async () => {
         setIsSaving(true);
         await API.saveProject(projectId, {
-            sourceCode: content
+            content: content
         });
         const project = await getProject(projectId);
         setProject(project);
