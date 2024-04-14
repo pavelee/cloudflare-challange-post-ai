@@ -4,6 +4,7 @@ import { API } from "@/app/util/api";
 import { Button, Drawer, Input, Switch } from "antd";
 import Image from "next/image";
 import { use, useEffect, useState } from "react";
+import Markdown from 'react-markdown'
 
 type ProjectViewProps = {
     projectId: string;
@@ -45,11 +46,11 @@ type PreviewProps = {
 const Preview = (
     props: PreviewProps
 ) => {
+    const { content } = props;
     return (
-        <div
-            className="hover:outline hover:cursor-pointer"
-            dangerouslySetInnerHTML={{ __html: props.content }}
-        ></div>
+        <Markdown>
+            {content}
+        </Markdown>
     )
 }
 
