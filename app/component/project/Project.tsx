@@ -5,7 +5,7 @@ import { ProjectView } from "./ProjectView";
 import { PromptForm } from "./PromptForm";
 import { useEffect, useState } from "react";
 import { AIAssistantChat } from "./AIConsultantChat";
-import { FloatButton, Spin } from "antd";
+import { Spin } from "antd";
 
 type ProjectProps = {
     projectId: string;
@@ -101,9 +101,6 @@ export const Project = (
 
     return (
         <div className="min-h-screen flex flex-col">
-            <FloatButton.Group shape="circle" style={{ right: 24 }}>
-                <FloatButton type="primary" onClick={openAIConsultantChat} />
-            </FloatButton.Group>
             <AIAssistantChat
                 messages={project?.messages || []}
                 isOpen={isAIConsultantChatOpen}
@@ -125,6 +122,7 @@ export const Project = (
                     setIsEdit={setIsEdit}
                     switchToPreviewAfterSave={switchToPreviewAfterSave}
                     setSwitchToPreviewAfterSave={setSwitchToPreviewAfterSave}
+                    openAIConsultantChat={openAIConsultantChat}
                 />
             </div>
         </div>

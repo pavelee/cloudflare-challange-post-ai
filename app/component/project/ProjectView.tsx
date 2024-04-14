@@ -52,6 +52,7 @@ type ProjectViewProps = {
     setIsEdit: (isEdit: boolean) => void;
     switchToPreviewAfterSave: boolean;
     setSwitchToPreviewAfterSave: (switchToPreviewAfterSave: boolean) => void;
+    openAIConsultantChat: () => void;
 }
 
 export const ProjectView = (
@@ -66,7 +67,8 @@ export const ProjectView = (
         isEdit,
         setIsEdit,
         switchToPreviewAfterSave,
-        setSwitchToPreviewAfterSave
+        setSwitchToPreviewAfterSave,
+        openAIConsultantChat
     } = props;
 
     const [haveAnyChanges, setHaveAnyChanges] = useState(false);
@@ -84,6 +86,12 @@ export const ProjectView = (
             <div className="space-y-4 flex gap-2">
                 <div className="flex flex-col gap-4 w-1/6">
                     <div className="sticky top-0 flex flex-col gap-4 p-4">
+                        <Button
+                            type="default"
+                            onClick={openAIConsultantChat}
+                        >
+                            AI Consultant 🚀
+                        </Button>
                         <Switch
                             checkedChildren="Edit"
                             unCheckedChildren="View"
