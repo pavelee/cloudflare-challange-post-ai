@@ -34,14 +34,11 @@ const AIAssistantChat = (
                             <p className="ml-3 font-bold">AI Assistant</p>
                         </div>
                         <div className="border p-4 rounded-xl">
-                            Hey! What is the next step?
+                            Hey! How could i help you with your project?
                         </div>
                     </div>
                 </div>
                 <div className="space-y-4 flex flex-col items-center">
-                    <Select className="w-full" value="1">
-                        <Select.Option value="1">Section 1</Select.Option>
-                    </Select>
                     <Input.TextArea onChange={(value) => {
                         console.log(value.target.value);
                         setCurrentMessage(value.target.value);
