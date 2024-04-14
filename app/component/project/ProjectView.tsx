@@ -6,11 +6,6 @@ import Image from "next/image";
 import { use, useEffect, useState } from "react";
 import { MarkdownAdapter } from "../MarkdownAdapter";
 
-type ProjectViewProps = {
-    projectId: string;
-    code: string;
-}
-
 type EditorProps = {
     content: string;
     setContent: (content: string) => void;
@@ -18,7 +13,7 @@ type EditorProps = {
     isSaving: boolean;
 }
 
-const Editor = (
+export const Editor = (
     props: EditorProps
 ) => {
     const { content, setContent, saveProject, isSaving } = props;
@@ -38,7 +33,7 @@ type PreviewProps = {
     content: string;
 }
 
-const Preview = (
+export const Preview = (
     props: PreviewProps
 ) => {
     const { content } = props;
@@ -47,34 +42,42 @@ const Preview = (
     )
 }
 
+type ProjectViewProps = {
+    code: string;
+    isSaving: boolean;
+    saveProject: () => void;
+    content: string;
+    setContent: (content: string) => void;
+    isEdit: boolean;
+    setIsEdit: (isEdit: boolean) => void;
+    switchToPreviewAfterSave: boolean;
+    setSwitchToPreviewAfterSave: (switchToPreviewAfterSave: boolean) => void;
+}
+
 export const ProjectView = (
     props: ProjectViewProps
 ) => {
-    const { projectId, code } = props;
-    const [content, setContent] = useState<string>(code);
-    const [isEdit, setIsEdit] = useState<boolean>(false);
-    const [switchToPreviewAfterSave, setSwitchToPreviewAfterSave] = useState<boolean>(true);
-    const [isSaving, setIsSaving] = useState<boolean>(false);
-    const [haveAnyChanges, setHaveAnyChanges] = useState<boolean>(false);
+    const {
+        code,
+        isSaving,
+        saveProject,
+        content,
+        setContent,
+        isEdit,
+        setIsEdit,
+        switchToPreviewAfterSave,
+        setSwitchToPreviewAfterSave
+    } = props;
+
+    const [haveAnyChanges, setHaveAnyChanges] = useState(false);
 
     useEffect(() => {
         setContent(code);
-    }, [code]);
+    }, [code, setContent]);
 
     useEffect(() => {
         setHaveAnyChanges(content != code);
     }, [content, code]);
-
-    const saveProject = async () => {
-        setIsSaving(true);
-        await API.saveProject(projectId, {
-            sourceCode: content
-        });
-        if (switchToPreviewAfterSave) {
-            setIsEdit(false);
-        }
-        setIsSaving(false);
-    }
 
     return (
         <div className="container mx-auto">

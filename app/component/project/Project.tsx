@@ -38,9 +38,14 @@ const chatProject = async (projectId: string, prompt: string) => {
 export const Project = (
     props: ProjectProps
 ) => {
+    const { projectId } = props;
     const [project, setProject] = useState<any | null>(null);
     const [isAIConsultantChatOpen, setIsAIConsultantChatOpen] = useState(true);
     const [isSendingMessage, setIsSendingMessage] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const [content, setContent] = useState("");
+    const [isEdit, setIsEdit] = useState(false);
+    const [switchToPreviewAfterSave, setSwitchToPreviewAfterSave] = useState(true);
 
     const openAIConsultantChat = () => {
         setIsAIConsultantChatOpen(true);
@@ -63,6 +68,20 @@ export const Project = (
         setProject(project);
         setIsSendingMessage(false);
     }
+
+    const saveProject = async () => {
+        setIsSaving(true);
+        await API.saveProject(projectId, {
+            sourceCode: content
+        });
+        const project = await getProject(projectId);
+        setProject(project);
+        if (switchToPreviewAfterSave) {
+            setIsEdit(false);
+        }
+        setIsSaving(false);
+    }
+
 
     useEffect(() => {
         const fetchProject = async () => {
@@ -96,8 +115,16 @@ export const Project = (
                 onPromptProject={onPromptProject}
             />
             <div className="grow">
-                <ProjectView projectId={props.projectId}
+                <ProjectView
                     code={project?.sourceCode || ""}
+                    isSaving={isSaving}
+                    saveProject={saveProject}
+                    content={content}
+                    setContent={setContent}
+                    isEdit={isEdit}
+                    setIsEdit={setIsEdit}
+                    switchToPreviewAfterSave={switchToPreviewAfterSave}
+                    setSwitchToPreviewAfterSave={setSwitchToPreviewAfterSave}
                 />
             </div>
         </div>
