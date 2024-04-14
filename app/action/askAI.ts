@@ -2,18 +2,28 @@ import { AIModelUrl } from "../util/cf/AIModelUrl";
 
 export type Models =
   | "@cf/meta/llama-2-7b-chat-fp16"
-  | "@hf/thebloke/deepseek-coder-6.7b-base-awq"
   | "@hf/thebloke/openhermes-2.5-mistral-7b-awq"
-  | "@cf/facebook/bart-large-cnn";
+  | "@cf/facebook/bart-large-cnn"
+  | "@cf/mistral/mistral-7b-instruct-v0.1"
+  | "@cf/tiiuae/falcon-7b-instruct"
+  | "@cf/google/gemma-2b-it-lora"
+  | "@hf/nousresearch/hermes-2-pro-mistral-7b"
+  | "@hf/thebloke/llama-2-13b-chat-awq"
+  | "@cf/qwen/qwen1.5-14b-chat-awq"
 
 export const availableModels: Models[] = [
   "@cf/meta/llama-2-7b-chat-fp16",
-  "@hf/thebloke/deepseek-coder-6.7b-base-awq",
   "@hf/thebloke/openhermes-2.5-mistral-7b-awq",
+  "@cf/mistral/mistral-7b-instruct-v0.1",
+  "@cf/tiiuae/falcon-7b-instruct",
+  "@cf/google/gemma-2b-it-lora",
+  "@hf/nousresearch/hermes-2-pro-mistral-7b",
+  "@hf/thebloke/llama-2-13b-chat-awq",
+  "@cf/qwen/qwen1.5-14b-chat-awq",
 ];
 
 export const defaultModel: Models =
-  "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
+  "@hf/nousresearch/hermes-2-pro-mistral-7b";
 
 export const summaryModel: Models = "@cf/facebook/bart-large-cnn";
 
