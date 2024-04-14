@@ -14,7 +14,9 @@ import { saveProject } from "./saveProject";
  */
 export const createProject = async (projectName: string): Promise<Project> => {
   const projectID = generateProjectID(projectName);
+  // @TODO move to factory
   const project = new Project(projectID, "");
+  project.addSystemMessage(`Hey! How could i help you with your project?`);
   await saveProject(project);
   return ProjectFactory.createFromObject(project.toObject());
 };
