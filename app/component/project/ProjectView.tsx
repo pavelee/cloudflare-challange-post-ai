@@ -136,7 +136,7 @@ export const ProjectView = (
                         }
                     </div>
                 </div>
-                <div className="w-5/6">
+                <div className="w-full lg:w-5/6">
                     {
                         isEdit ? (
                             <Editor
