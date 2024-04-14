@@ -15,15 +15,17 @@ type EditorProps = {
     content: string;
     setContent: (content: string) => void;
     saveProject: () => void;
+    isSaving: boolean;
 }
 
 const Editor = (
     props: EditorProps
 ) => {
-    const { content, setContent, saveProject } = props;
+    const { content, setContent, saveProject, isSaving } = props;
     return (
         <div className="space-y-4">
             <Button
+                loading={isSaving}
                 type="primary"
                 onClick={saveProject}
             >
@@ -60,26 +62,37 @@ export const ProjectView = (
     const { projectId, code } = props;
     const [content, setContent] = useState<string>(code);
     const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [switchToPreviewAfterSave, setSwitchToPreviewAfterSave] = useState<boolean>(true);
+    const [isSaving, setIsSaving] = useState<boolean>(false);
 
     useEffect(() => {
         setContent(code);
     }, [code]);
 
     const saveProject = async () => {
+        setIsSaving(true);
         await API.saveProject(projectId, {
             sourceCode: content
         });
+        setIsEdit(false);
+        setIsSaving(false);
     }
 
     return (
         <div className="container mx-auto w-1/2">
             <div className="space-y-4">
-                <div className="flex justify-center">
+                <div className="flex justify-center gap-4">
                     <Switch
                         checkedChildren="Edit"
                         unCheckedChildren="View"
                         defaultChecked={false}
                         onChange={(checked) => setIsEdit(checked)}
+                    />
+                    <Switch
+                        checkedChildren="Switch to view after save"
+                        unCheckedChildren="Stay in edit mode after save"
+                        defaultChecked={true}
+                        onChange={(checked) => setSwitchToPreviewAfterSave(checked)}
                     />
                 </div>
                 {
@@ -88,6 +101,7 @@ export const ProjectView = (
                             content={content}
                             setContent={setContent}
                             saveProject={saveProject}
+                            isSaving={isSaving}
                         />
                     ) : (
                         <Preview content={content} />
