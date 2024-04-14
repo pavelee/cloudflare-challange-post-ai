@@ -51,7 +51,7 @@ const User = () => {
 const Message = (props: MessageType) => {
     const { actor, text, date } = props;
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
             {
                 actor === "system" && <SystemUser />
             }
