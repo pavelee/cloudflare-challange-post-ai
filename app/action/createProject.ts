@@ -31,6 +31,10 @@ You can ask AI to generate a title for your post. Just click on the AI Title Gen
 ### AI Cover Image Generator
 
 You can ask AI to generate a cover image for your post. Just click on the AI Cover Image Generator button.
+
+### How to use AI responsibly?
+
+AI is your assistant, you are in charge. AI is a neutral tool, it depends on you how you use it. AI can help you with generating ideas, but you are the one who decides what to do with them.
 `;
 
 /**
