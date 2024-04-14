@@ -98,7 +98,7 @@ export const AIAssistantChat = (
 
     return (
         <Drawer title="AI assistant" open={isOpen} onClose={onClose}>
-            <div className="space-y-8 overflow-y-scroll h-full p-2">
+            <div className="flex flex-col gap-4 h-full p-1 relative">
                 <div>
                     <ModelSelector
                         model={model}
@@ -106,15 +106,19 @@ export const AIAssistantChat = (
                         setModel={setModel}
                     />
                 </div>
-                {
-                    messages.map((message, index) => (
-                        <Message key={index} {...message} />
-                    ))
-                }
+                <div className="space-y-4 grow overflow-y-scroll">
+                    {
+                        messages.map((message, index) => (
+                            <Message key={index} {...message} />
+                        ))
+                    }
+                </div>
                 <div className="space-y-4 flex flex-col items-center">
-                    <Input.TextArea onChange={(value) => {
-                        setCurrentMessage(value.target.value);
-                    }} className="w-full rounded-xl" name="prompt" placeholder="What we do next?"></Input.TextArea>
+                    <Input.TextArea
+                        rows={5}
+                        onChange={(value) => {
+                            setCurrentMessage(value.target.value);
+                        }} className="w-full rounded-xl text-lg" name="prompt"></Input.TextArea>
                     <Button loading={isSendingMessage} onClick={() => { onChatProject(currentMessage) }} type="primary">send</Button>
                 </div>
             </div>

@@ -110,7 +110,7 @@ export const ProjectView = (
                             type="default"
                             onClick={openAIConsultantChat}
                         >
-                            AI Chat 🚀
+                            AI Assistant 🛟
                         </Button>
                         <ProjectTitleGeneratorModal
                             title="AI Title Generator 🤖"

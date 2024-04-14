@@ -20,9 +20,9 @@ Markdown is a lightweight markup language with plain-text-formatting syntax. Its
 
 ## How AI could help you?
 
-### AI Chat
+### AI Assistant
 
-You can ask AI to generate some text for you. Just click on the AI Chat button and ask AI for help.
+You can ask AI to generate some text for you. Just click on the AI Assistant button and ask AI for help.
 
 ### AI Title Generator
 
