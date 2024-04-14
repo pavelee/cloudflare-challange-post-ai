@@ -7,7 +7,31 @@ import { saveProject } from "./saveProject";
 
 const startingMessageFromSystem = `Hey! I am helpfull AI assistant. I am here to help you with writing your post. Just ask me anything!`;
 
-const startingContent = `# What are we going to write about today? 🤓`;
+const startingContent = `
+# Hello! Welcome to your new project!
+
+## How to use this editor?
+
+This editor is using markdown syntax. You can write your content in markdown and see the preview after switching to the preview mode and back to the editor mode.
+
+## What is markdown?
+
+Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+
+## How AI could help you?
+
+### AI Chat
+
+You can ask AI to generate some text for you. Just click on the AI Chat button and ask AI for help.
+
+### AI Title Generator
+
+You can ask AI to generate a title for your post. Just click on the AI Title Generator button.
+
+### AI Cover Image Generator
+
+You can ask AI to generate a cover image for your post. Just click on the AI Cover Image Generator button.
+`;
 
 /**
  * function that will create project ID and coresponding file with project's source code on the disk
