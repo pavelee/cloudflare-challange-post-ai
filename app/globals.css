@@ -3,25 +3,59 @@
 @tailwind utilities;
 
 @layer components {
-    .markdown-editor {
-      @apply p-4 bg-white shadow rounded;
-  
-      /* Add more styles as needed */
-  
-      .markdown-header {
-        @apply text-2xl font-bold;
-      }
-  
-      .markdown-list {
-        @apply list-disc list-inside;
-      }
-  
-      .markdown-link {
-        @apply text-blue-500 underline;
-      }
-  
-      .markdown-code {
-        @apply p-2 bg-gray-200 rounded text-sm font-mono;
-      }
+  .markdown-editor {
+    @apply p-4 bg-white shadow rounded space-y-4;
+
+    /* Add more styles as needed */
+
+    h1 {
+      @apply text-2xl font-bold;
     }
+
+    ul {
+      @apply list-disc list-inside;
+    }
+
+    a {
+      @apply text-blue-500 underline;
+    }
+
+    pre {
+      @apply p-2 bg-gray-200 rounded text-sm font-mono;
+    }
+
+    /* Additional styles */
+
+    h2 {
+      @apply text-xl font-bold;
+    }
+
+    h3 {
+      @apply text-lg font-bold;
+    }
+
+    p {
+      @apply leading-normal;
+    }
+
+    blockquote {
+      @apply border-l-4 border-gray-300 pl-4 italic;
+    }
+
+    code {
+      @apply p-1 bg-gray-100 rounded text-sm font-mono;
+    }
+
+    table {
+      @apply w-full border-collapse;
+    }
+
+    th {
+      @apply bg-gray-200 font-bold text-left p-2;
+    }
+
+    td {
+      @apply border-gray-300 p-2;
+    }
+  }
 }

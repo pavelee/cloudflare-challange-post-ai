@@ -10,7 +10,7 @@ export const MarkdownAdapter = (
 ) => {
     const { content } = props;
 
-    return <Markdown>
+    return <Markdown className={'markdown-editor'}>
         {content}
     </Markdown>
 }
