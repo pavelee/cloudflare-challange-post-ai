@@ -6,8 +6,8 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pokemon",
-  description: "Pokemon",
+  title: "Write your post with AI assistance",
+  description: "Write your post with AI assistance",
 };
 
 export default function RootLayout({
