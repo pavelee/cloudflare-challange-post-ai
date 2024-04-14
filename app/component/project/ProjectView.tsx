@@ -74,7 +74,9 @@ export const ProjectView = (
         await API.saveProject(projectId, {
             sourceCode: content
         });
-        setIsEdit(false);
+        if (switchToPreviewAfterSave) {
+            setIsEdit(false);
+        }
         setIsSaving(false);
     }
 
