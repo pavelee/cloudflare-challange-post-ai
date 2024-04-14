@@ -25,7 +25,7 @@ export const Editor = (
         <div className="space-y-4">
             <Input.TextArea
                 value={content}
-                rows={100}
+                rows={50}
                 onChange={(e) => setContent(e.target.value)}
             >
             </Input.TextArea>
