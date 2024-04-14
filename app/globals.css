@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .markdown-editor {
+      @apply p-4 bg-white shadow rounded;
+  
+      /* Add more styles as needed */
+  
+      .markdown-header {
+        @apply text-2xl font-bold;
+      }
+  
+      .markdown-list {
+        @apply list-disc list-inside;
+      }
+  
+      .markdown-link {
+        @apply text-blue-500 underline;
+      }
+  
+      .markdown-code {
+        @apply p-2 bg-gray-200 rounded text-sm font-mono;
+      }
+    }
+}

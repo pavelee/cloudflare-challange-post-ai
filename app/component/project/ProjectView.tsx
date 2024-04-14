@@ -4,7 +4,7 @@ import { API } from "@/app/util/api";
 import { Button, Drawer, Input, Switch } from "antd";
 import Image from "next/image";
 import { use, useEffect, useState } from "react";
-import Markdown from 'react-markdown'
+import { MarkdownAdapter } from "../MarkdownAdapter";
 
 type ProjectViewProps = {
     projectId: string;
@@ -50,9 +50,7 @@ const Preview = (
 ) => {
     const { content } = props;
     return (
-        <Markdown>
-            {content}
-        </Markdown>
+        <MarkdownAdapter content={content} />
     )
 }
 

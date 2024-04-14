@@ -4,7 +4,7 @@ import { MessageType } from "@/app/_model/Message";
 import { Button, Drawer, Input } from "antd";
 import Image from "next/image";
 import { useState } from "react";
-import Markdown from "react-markdown";
+import { MarkdownAdapter } from "../MarkdownAdapter";
 
 type AIAssistantChatProps = {
     messages: MessageType[];
@@ -62,7 +62,9 @@ const Message = (props: MessageType) => {
             <div className="space-y-1">
                 <div className="text-small text-gray-400">{(new Date(date)).toLocaleString()}</div>
                 <div className={`p-4 rounded-xl ${actor === "system" ? "bg-gray-100" : "bg-blue-100"}`}>
-                    <Markdown>{text}</Markdown>
+                    <MarkdownAdapter
+                        content={text}
+                    />
                 </div>
             </div>
         </div>
