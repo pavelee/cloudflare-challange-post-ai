@@ -1,10 +1,18 @@
+import { Message } from "postcss";
+import { MessageType } from "./Message";
+
 export type ProjectType = {
   id: string;
   sourceCode: string;
+  messages: MessageType[];
 };
 
 export class Project {
-  public constructor(private id: string, private sourceCode: string) {}
+  public constructor(
+    private id: string,
+    private sourceCode: string,
+    private messages: Message[] = []
+  ) {}
 
   getID(): string {
     return this.id;
@@ -22,6 +30,7 @@ export class Project {
     return {
       id: this.id,
       sourceCode: this.sourceCode,
+      messages: this.messages.map((message) => message.toObject()),
     };
   }
 }
