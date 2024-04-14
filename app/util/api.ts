@@ -23,6 +23,15 @@ type promptProjectOut = {
   code: string;
 };
 
+type summaryContentIn = {
+  projectID: string;
+  content: string;
+};
+
+type summaryContentOut = {
+  summary: string;
+};
+
 export class API {
   static async createProject(projectName: string) {
     const response = await fetch("/api/project", {
@@ -75,6 +84,34 @@ export class API {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ prompt, chatModel: model }),
+    });
+    return response.json();
+  }
+
+  static async summaryContent(
+    data: summaryContentIn
+  ): Promise<summaryContentOut> {
+    const response = await fetch(`/api/project/summary`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  }
+
+  static async generateProjectTitle(
+    projectId: string,
+    content: string,
+    context?: string
+  ) {
+    const response = await fetch(`/api/project/${projectId}/title`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content, context }),
     });
     return response.json();
   }

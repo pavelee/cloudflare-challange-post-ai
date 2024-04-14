@@ -5,6 +5,9 @@ import { Button, Drawer, Input, Switch } from "antd";
 import Image from "next/image";
 import { use, useEffect, useState } from "react";
 import { MarkdownAdapter } from "../MarkdownAdapter";
+import { ProjectTitleGenerator } from "./ProjectTitleGenerator";
+import { ProjectType } from "@/app/_model/Project";
+import { ProjectTitleGeneratorModal } from "./ProjectTitleGeneratorModal";
 
 type EditorProps = {
     content: string;
@@ -43,6 +46,7 @@ export const Preview = (
 }
 
 type ProjectViewProps = {
+    project: ProjectType;
     code: string;
     isSaving: boolean;
     saveProject: () => void;
@@ -59,6 +63,7 @@ export const ProjectView = (
     props: ProjectViewProps
 ) => {
     const {
+        project,
         code,
         isSaving,
         saveProject,
@@ -90,8 +95,13 @@ export const ProjectView = (
                             type="default"
                             onClick={openAIConsultantChat}
                         >
-                            AI Consultant 🚀
+                            AI Chat 🚀
                         </Button>
+                        <ProjectTitleGeneratorModal
+                            title="AI Title Generator 🤖"
+                            projectId={project.id}
+                            content={content}
+                        />
                         <Switch
                             checkedChildren="Edit"
                             unCheckedChildren="View"

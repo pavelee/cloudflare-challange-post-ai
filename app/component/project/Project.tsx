@@ -42,7 +42,7 @@ export const Project = (
 ) => {
     const { projectId } = props;
     const [project, setProject] = useState<ProjectType | null>(null);
-    const [isAIConsultantChatOpen, setIsAIConsultantChatOpen] = useState(true);
+    const [isAIConsultantChatOpen, setIsAIConsultantChatOpen] = useState(false);
     const [isSendingMessage, setIsSendingMessage] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [content, setContent] = useState("");
@@ -133,6 +133,7 @@ export const Project = (
             /> */}
             <div className="grow">
                 <ProjectView
+                    project={project}
                     code={project?.sourceCode || ""}
                     isSaving={isSaving}
                     saveProject={saveProject}

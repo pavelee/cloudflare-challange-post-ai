@@ -3,7 +3,8 @@ import { AIModelUrl } from "../util/cf/AIModelUrl";
 export type Models =
   | "@cf/meta/llama-2-7b-chat-fp16"
   | "@hf/thebloke/deepseek-coder-6.7b-base-awq"
-  | "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
+  | "@hf/thebloke/openhermes-2.5-mistral-7b-awq"
+  | "@cf/facebook/bart-large-cnn";
 
 export const availableModels: Models[] = [
   "@cf/meta/llama-2-7b-chat-fp16",
@@ -11,7 +12,10 @@ export const availableModels: Models[] = [
   "@hf/thebloke/openhermes-2.5-mistral-7b-awq",
 ];
 
-export const defaultModel = "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
+export const defaultModel: Models =
+  "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
+
+export const summaryModel: Models = "@cf/facebook/bart-large-cnn";
 
 export type BasicPrompt = {
   prompt: string;
@@ -22,7 +26,12 @@ export type ChatPrompt = {
   messages: { role: string; content: string }[];
 };
 
-export type Prompt = BasicPrompt | ChatPrompt;
+export type SummaryPrompt = {
+  input_text: string;
+  max_length?: number;
+};
+
+export type Prompt = BasicPrompt | ChatPrompt | SummaryPrompt;
 
 export const askAI = async (prompt: Prompt, model: Models = defaultModel) => {
   const cloudfrareKey = process.env.CLOUDFLARE_API_KEY;
@@ -52,6 +61,10 @@ export const askAI = async (prompt: Prompt, model: Models = defaultModel) => {
     },
   });
   const res = await req.json();
+
+  if (res.result.summary) {
+    return res.result.summary;
+  }
   const response = res.result.response;
 
   return response;
