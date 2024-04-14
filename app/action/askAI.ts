@@ -1,8 +1,10 @@
 "use server";
 
+import { AIModelUrl } from "../util/cf/AIModelUrl";
+
 const defaultModel = "@cf/meta/llama-2-7b-chat-fp16";
 
-type Models =
+export type Models =
   | "@cf/meta/llama-2-7b-chat-fp16"
   | "@hf/thebloke/deepseek-coder-6.7b-base-awq"
   | "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
@@ -17,10 +19,6 @@ export type ChatPrompt = {
 };
 
 export type Prompt = BasicPrompt | ChatPrompt;
-
-export const buildUrl = (accountId: string, model: Models) => {
-  return `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/run/${model}`;
-};
 
 export const askAI = async (prompt: Prompt, model: Models = defaultModel) => {
   const cloudfrareKey = process.env.CLOUDFLARE_API_KEY;
@@ -40,7 +38,9 @@ export const askAI = async (prompt: Prompt, model: Models = defaultModel) => {
     }
   }
 
-  const req = await fetch(buildUrl(cfAccountId, model), {
+  const url = AIModelUrl(cfAccountId, model);
+
+  const req = await fetch(url, {
     method: "POST",
     body: JSON.stringify(prompt),
     headers: {
