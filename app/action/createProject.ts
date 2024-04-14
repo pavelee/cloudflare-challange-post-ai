@@ -4,6 +4,8 @@ import { Project } from "../_model/Project";
 import { generateProjectID } from "../util/generateProjectID";
 import { saveProject } from "./saveProject";
 
+const startingMessageFromSystem = `Hey! I am helpfull AI assistant. I am here to help you with writing your post. Just ask me anything!`;
+
 /**
  * function that will create project ID and coresponding file with project's source code on the disk
  * project ID must be unique, should be based on passed projectName and unique salt, projectName should be cleaned from any special characters
@@ -16,7 +18,7 @@ export const createProject = async (projectName: string): Promise<Project> => {
   const projectID = generateProjectID(projectName);
   // @TODO move to factory
   const project = new Project(projectID, "");
-  project.addSystemMessage(`Hey! How could i help you with your project?`);
+  project.addSystemMessage(startingMessageFromSystem);
   await saveProject(project);
   return ProjectFactory.createFromObject(project.toObject());
 };
