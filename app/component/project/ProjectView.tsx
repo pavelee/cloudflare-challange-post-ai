@@ -8,6 +8,7 @@ import { MarkdownAdapter } from "../MarkdownAdapter";
 import { ProjectTitleGenerator } from "./ProjectTitleGenerator";
 import { ProjectType } from "@/app/_model/Project";
 import { ProjectTitleGeneratorModal } from "./ProjectTitleGeneratorModal";
+import { ProjectCoverGeneratorModal } from "./ProjectCoverGeneratorModal";
 
 type EditorProps = {
     content: string;
@@ -99,6 +100,11 @@ export const ProjectView = (
                         </Button>
                         <ProjectTitleGeneratorModal
                             title="AI Title Generator 🤖"
+                            projectId={project.id}
+                            content={content}
+                        />
+                        <ProjectCoverGeneratorModal
+                            title="AI Cover Generator 🖼️"
                             projectId={project.id}
                             content={content}
                         />

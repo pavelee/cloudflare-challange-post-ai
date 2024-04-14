@@ -1,5 +1,11 @@
 import { AIModelUrl } from "../util/cf/AIModelUrl";
 
+export type ImageModels = "@cf/lykon/dreamshaper-8-lcm"
+// | "@cf/runwayml/stable-diffusion-v1-5-img2img" // not working 😭
+// | "@cf/runwayml/stable-diffusion-v1-5-inpainting" // not working 😭
+| "@cf/stabilityai/stable-diffusion-xl-base-1.0"
+| "@cf/bytedance/stable-diffusion-xl-lightning";
+
 export type Models =
   | "@cf/meta/llama-2-7b-chat-fp16"
   | "@hf/thebloke/openhermes-2.5-mistral-7b-awq"
@@ -10,6 +16,7 @@ export type Models =
   | "@hf/nousresearch/hermes-2-pro-mistral-7b"
   | "@hf/thebloke/llama-2-13b-chat-awq"
   | "@cf/qwen/qwen1.5-14b-chat-awq"
+  | ImageModels;
 
 export const availableModels: Models[] = [
   "@cf/meta/llama-2-7b-chat-fp16",
@@ -22,8 +29,17 @@ export const availableModels: Models[] = [
   "@cf/qwen/qwen1.5-14b-chat-awq",
 ];
 
-export const defaultModel: Models =
-  "@hf/nousresearch/hermes-2-pro-mistral-7b";
+export const imageGenerationModels: Models[] = [
+  "@cf/lykon/dreamshaper-8-lcm",
+  // "@cf/runwayml/stable-diffusion-v1-5-img2img",
+  // "@cf/runwayml/stable-diffusion-v1-5-inpainting",
+  "@cf/stabilityai/stable-diffusion-xl-base-1.0",
+  "@cf/bytedance/stable-diffusion-xl-lightning"
+];
+
+export const defaultModel: Models = "@hf/nousresearch/hermes-2-pro-mistral-7b";
+
+export const defaultImageModel: Models = "@cf/lykon/dreamshaper-8-lcm";
 
 export const summaryModel: Models = "@cf/facebook/bart-large-cnn";
 
@@ -70,6 +86,12 @@ export const askAI = async (prompt: Prompt, model: Models = defaultModel) => {
       Authorization: `Bearer ${cloudfrareKey}`,
     },
   });
+
+  if (imageGenerationModels.includes(model)) {
+    const res = await req.blob();
+    return res;
+  }
+
   const res = await req.json();
 
   if (res.result.summary) {

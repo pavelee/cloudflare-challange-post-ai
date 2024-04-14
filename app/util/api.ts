@@ -115,4 +115,24 @@ export class API {
     });
     return response.json();
   }
+
+  static async generateProjectCover(
+    projectId: string,
+    content: string,
+    context?: string,
+    model?: Models
+  ) {
+    const response = await fetch(`/api/project/${projectId}/cover`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content, context, model }),
+    });
+    const res = await response.blob();
+
+    const url = URL.createObjectURL(res);
+
+    return url;
+  }
 }
