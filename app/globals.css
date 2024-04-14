@@ -57,5 +57,9 @@
     td {
       @apply border-gray-300 p-2;
     }
+
+    img {
+      @apply mx-auto;
+    }
   }
 }
