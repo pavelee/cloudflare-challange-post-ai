@@ -11,14 +11,7 @@ const SystemUser = () => {
     return (
         <div>
             <div className="flex items-center gap-2">
-                <Image
-                    className="w-10 h-10 rounded-full"
-                    src="https://i.pravatar.cc/300"
-                    width={40}
-                    height={40}
-                    alt="AI Assistant"
-                />
-                <p className="font-bold">AI Assistant</p>
+                <p className="font-bold text-gray-400">AI Assistant</p>
             </div>
         </div>
     )
@@ -29,14 +22,7 @@ const User = () => {
     return (
         <div>
             <div className="flex items-center gap-2">
-                {/* <Image
-                    className="w-10 h-10 rounded-full"
-                    src="https://i.pravatar.cc/300"
-                    width={40}
-                    height={40}
-                    alt="User"
-                /> */}
-                <p className="font-bold">User</p>
+                <p className="font-bold text-gray-400">User</p>
             </div>
         </div>
     )
