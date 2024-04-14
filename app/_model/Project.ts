@@ -1,5 +1,4 @@
-import { Message } from "postcss";
-import { MessageType } from "./Message";
+import { Message, MessageType } from "./Message";
 
 export type ProjectType = {
   id: string;
@@ -24,6 +23,18 @@ export class Project {
 
   setSourceCode(sourceCode: string): void {
     this.sourceCode = sourceCode;
+  }
+
+  getMessages(): Message[] {
+    return this.messages;
+  }
+
+  addSystemMessage(message: string): void {
+    this.messages.push(new Message("system", message));
+  }
+
+  addUserMessage(message: string): void {
+    this.messages.push(new Message("user", message));
   }
 
   toObject(): ProjectType {

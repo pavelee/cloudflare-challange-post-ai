@@ -1,4 +1,7 @@
+export type ActorType = "system" | "user";
+
 export type MessageType = {
+  actor: ActorType;
   text: string;
   objectId: string;
   date: Date;
@@ -6,10 +9,15 @@ export type MessageType = {
 
 export class Message {
   public constructor(
+    private actor: ActorType,
     private text: string,
-    private objectId: string,
-    private date: Date
+    private objectId: string = "",
+    private date: Date = new Date()
   ) {}
+
+  getActor(): ActorType {
+    return this.actor;
+  }
 
   getText(): string {
     return this.text;
@@ -37,6 +45,7 @@ export class Message {
 
   toObject(): MessageType {
     return {
+      actor: this.actor,
       text: this.text,
       objectId: this.objectId,
       date: this.date,
