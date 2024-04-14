@@ -14,6 +14,7 @@ export class KVStorage<T> implements Storage<T> {
       method: "GET",
       headers: {
         Authorization: `Bearer ${this.key}`,
+        cache: "no-cache",
       },
     });
     let data = await response.json();

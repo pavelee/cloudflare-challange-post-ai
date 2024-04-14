@@ -35,11 +35,17 @@ export class API {
   }
 
   static async getProject(data: getProjectIn): Promise<getProjectOut> {
-    const response = await fetch(`/api/project?projectID=${data.projectId}`);
+    const response = await fetch(`/api/project?projectID=${data.projectId}`, {
+      method: "GET",
+      cache: "no-cache",
+    });
     return await response.json();
   }
 
-  static async saveProject(projectId: string, data: saveProjectIn): Promise<saveProjectOut> {
+  static async saveProject(
+    projectId: string,
+    data: saveProjectIn
+  ): Promise<saveProjectOut> {
     const response = await fetch(`/api/project?projectID=${projectId}`, {
       method: "PUT",
       headers: {
