@@ -1,7 +1,7 @@
 'use client';
 
 import { API } from "@/app/util/api";
-import { Button, Form, Input, Modal } from "antd"
+import { Alert, Button, Form, Input, Modal } from "antd"
 import { ReactNode, useState } from "react";
 
 type ProjectTitleGeneratorProps = {
@@ -39,7 +39,8 @@ export const ProjectTitleGenerator = (
 
     const { title } = props;
     return (
-        <div className="p-5">
+        <div className="p-5 space-y-4">
+            <Alert message="Title is generated based on summary of the text" type="info" showIcon />
             <Form>
                 <Form.Item>
                     <Input.TextArea
