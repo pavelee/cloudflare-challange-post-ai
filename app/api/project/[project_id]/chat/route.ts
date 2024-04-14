@@ -1,6 +1,8 @@
 import { chatProject } from "@/app/action/chatProject";
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 type Props = {
   params: {
     project_id: string;
