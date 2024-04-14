@@ -1,6 +1,8 @@
 import { generateProjectTitle } from "@/app/action/generateProjectTitle";
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = 'edge';
+
 export const POST = async (request: NextRequest) => {
   const { content, context } = await request.json();
 
