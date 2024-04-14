@@ -20,19 +20,6 @@ const getProject = async (projectId: string) => {
     return project;
 }
 
-const getProjectCode = async (projectId: string) => {
-    const project = await getProject(projectId);
-    return project.sourceCode;
-}
-
-const promptProject = async (projectId: string, prompt: string) => {
-    const code = await API.promptProject({
-        projectId,
-        prompt
-    });
-    return code.code;
-}
-
 const chatProject = async (projectId: string, prompt: string, model?: Models) => {
     return await API.chatProject(projectId, prompt, model);
 }
@@ -58,12 +45,6 @@ export const Project = (
     const closeAIConsultantChat = () => {
         setIsAIConsultantChatOpen(false);
     }
-
-    // const onPromptProject = async (prompt: string) => {
-    //     const code = await promptProject(props.projectId, prompt);
-    //     if (!code) return;
-    //     setProject(code);
-    // }
 
     const onChatProject = async (prompt: string) => {
         setIsSendingMessage(true);
