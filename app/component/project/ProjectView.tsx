@@ -89,9 +89,23 @@ export const ProjectView = (
 
     return (
         <div className="container mx-auto">
-            <div className="space-y-4 flex gap-2">
-                <div className="flex flex-col gap-4 w-1/6">
-                    <div className="sticky top-0 flex flex-col gap-4 p-4">
+            <div className="space-y-4 flex flex-col lg:flex-row gap-2">
+                <div className="flex flex-col gap-4">
+                    <div className="sticky top-0 flex flex-row lg:flex-col flex-wrap gap-4 p-4">
+                        <Switch
+                            checkedChildren="Edit"
+                            unCheckedChildren="View"
+                            defaultChecked={false}
+                            value={isEdit}
+                            onChange={(checked) => setIsEdit(checked)}
+                        />
+                        <Switch
+                            checkedChildren="Switch to view after save"
+                            unCheckedChildren="Stay in edit mode after save"
+                            defaultChecked={true}
+                            value={switchToPreviewAfterSave}
+                            onChange={(checked) => setSwitchToPreviewAfterSave(checked)}
+                        />
                         <Button
                             type="default"
                             onClick={openAIConsultantChat}
@@ -107,20 +121,6 @@ export const ProjectView = (
                             title="AI Cover Generator 🖼️"
                             projectId={project.id}
                             content={content}
-                        />
-                        <Switch
-                            checkedChildren="Edit"
-                            unCheckedChildren="View"
-                            defaultChecked={false}
-                            value={isEdit}
-                            onChange={(checked) => setIsEdit(checked)}
-                        />
-                        <Switch
-                            checkedChildren="Switch to view after save"
-                            unCheckedChildren="Stay in edit mode after save"
-                            defaultChecked={true}
-                            value={switchToPreviewAfterSave}
-                            onChange={(checked) => setSwitchToPreviewAfterSave(checked)}
                         />
                         {
                             isEdit && (
