@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Form } from "./component/Form";
 
 export const runtime = 'edge';
