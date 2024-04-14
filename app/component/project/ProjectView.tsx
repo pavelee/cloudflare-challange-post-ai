@@ -14,6 +14,36 @@ export const ProjectView = (
     props: ProjectViewProps
 ) => {
     const { projectId, code } = props;
+    const [content, setContent] = useState<string>(code);
+
+    useEffect(() => {
+        setContent(code);
+    }, [code]);
+
+    const saveProject = async () => {
+        await API.saveProject(projectId, {
+            sourceCode: content
+        });
+    }
+
+    return (
+        <div className="container mx-auto w-1/2">
+            <div>
+                <Button
+                    type="primary"
+                    onClick={saveProject}
+                >
+                    Save
+                </Button>
+                <Input.TextArea
+                    value={content}
+                    rows={100}
+                    onChange={(e) => setContent(e.target.value)}
+                >
+                </Input.TextArea>
+            </div>
+        </div>
+    )
 
     return (
         <div>
@@ -21,9 +51,6 @@ export const ProjectView = (
                 className="hover:outline hover:cursor-pointer"
                 dangerouslySetInnerHTML={{ __html: code }}
             ></div>
-            <div className="flex justify-center p-5 animate-pulse">
-                <Button type="primary">Add next section</Button>
-            </div>
         </div>
     )
 

@@ -7,6 +7,12 @@ type getProjectOut = {
   sourceCode: string;
 };
 
+type saveProjectIn = {
+  sourceCode: string;
+};
+
+type saveProjectOut = getProjectOut;
+
 type promptProjectIn = {
   projectId: string;
   prompt: string;
@@ -31,6 +37,17 @@ export class API {
   static async getProject(data: getProjectIn): Promise<getProjectOut> {
     const response = await fetch(`/api/project?projectID=${data.projectId}`);
     return await response.json();
+  }
+
+  static async saveProject(projectId: string, data: saveProjectIn): Promise<saveProjectOut> {
+    const response = await fetch(`/api/project?projectID=${projectId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content: data.sourceCode }),
+    });
+    return response.json();
   }
 
   static async promptProject(data: promptProjectIn): Promise<promptProjectOut> {
