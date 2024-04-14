@@ -6,17 +6,19 @@ export type ImageModels = "@cf/lykon/dreamshaper-8-lcm"
 | "@cf/stabilityai/stable-diffusion-xl-base-1.0"
 | "@cf/bytedance/stable-diffusion-xl-lightning";
 
+export type SummaryModels = "@cf/facebook/bart-large-cnn";
+
 export type Models =
   | "@cf/meta/llama-2-7b-chat-fp16"
   | "@hf/thebloke/openhermes-2.5-mistral-7b-awq"
-  | "@cf/facebook/bart-large-cnn"
   | "@cf/mistral/mistral-7b-instruct-v0.1"
   | "@cf/tiiuae/falcon-7b-instruct"
   | "@cf/google/gemma-2b-it-lora"
   | "@hf/nousresearch/hermes-2-pro-mistral-7b"
   | "@hf/thebloke/llama-2-13b-chat-awq"
   | "@cf/qwen/qwen1.5-14b-chat-awq"
-  | ImageModels;
+  | ImageModels
+  | SummaryModels;
 
 export const availableModels: Models[] = [
   "@cf/meta/llama-2-7b-chat-fp16",
