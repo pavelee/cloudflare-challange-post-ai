@@ -4,6 +4,7 @@ import { API } from "@/app/util/api";
 import { ProjectView } from "./ProjectView";
 import { PromptForm } from "./PromptForm";
 import { useEffect, useState } from "react";
+import { AIAssistantChat } from "./AIConsultantChat";
 
 type ProjectProps = {
     projectId: string;
@@ -33,6 +34,7 @@ export const Project = (
     props: ProjectProps
 ) => {
     const [project, setProject] = useState<any | null>(null);
+    const [isAIConsultantChatOpen, setIsAIConsultantChatOpen] = useState(true);
 
     const onPromptProject = async (prompt: string) => {
         const code = await promptProject(props.projectId, prompt);
@@ -42,22 +44,31 @@ export const Project = (
 
     useEffect(() => {
         const fetchProject = async () => {
-            const code = await getProjectCode(props.projectId);
-            if (!code) return;
-            setProject(code);
+            const project = await getProject(props.projectId);
+            if (!project) return;
+            setProject(project);
         };
 
         fetchProject();
     }, [props.projectId]);
 
+    if (!project) return (
+        <div>Loading...</div>
+    );
+
     return (
         <div className="min-h-screen flex flex-col">
+            <AIAssistantChat
+                messages={project?.messages || []}
+                isOpen={isAIConsultantChatOpen}
+                onClose={() => setIsAIConsultantChatOpen(false)}
+            />
             <PromptForm
                 onPromptProject={onPromptProject}
             />
             <div className="grow">
                 <ProjectView projectId={props.projectId}
-                    code={project}
+                    code={project?.sourceCode || ""}
                 />
             </div>
         </div>
