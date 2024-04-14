@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { AIAssistantChat } from "./AIConsultantChat";
 import { Spin } from "antd";
 import { Models, availableModels, defaultModel } from "@/app/action/askAI";
+import { ProjectType } from "@/app/_model/Project";
 
 type ProjectProps = {
     projectId: string;
@@ -32,7 +33,7 @@ const promptProject = async (projectId: string, prompt: string) => {
     return code.code;
 }
 
-const chatProject = async (projectId: string, prompt: string, model: Models) => {
+const chatProject = async (projectId: string, prompt: string, model?: Models) => {
     return await API.chatProject(projectId, prompt, model);
 }
 
@@ -40,14 +41,14 @@ export const Project = (
     props: ProjectProps
 ) => {
     const { projectId } = props;
-    const [project, setProject] = useState<any | null>(null);
+    const [project, setProject] = useState<ProjectType | null>(null);
     const [isAIConsultantChatOpen, setIsAIConsultantChatOpen] = useState(true);
     const [isSendingMessage, setIsSendingMessage] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [content, setContent] = useState("");
     const [isEdit, setIsEdit] = useState(false);
     const [switchToPreviewAfterSave, setSwitchToPreviewAfterSave] = useState(true);
-    const [model, setModel] = useState<Models>(defaultModel);
+    const [model, setModel] = useState<Models | null>(null);
     const [models, setModels] = useState<Models[]>(availableModels);
 
     const openAIConsultantChat = () => {
@@ -58,15 +59,15 @@ export const Project = (
         setIsAIConsultantChatOpen(false);
     }
 
-    const onPromptProject = async (prompt: string) => {
-        const code = await promptProject(props.projectId, prompt);
-        if (!code) return;
-        setProject(code);
-    }
+    // const onPromptProject = async (prompt: string) => {
+    //     const code = await promptProject(props.projectId, prompt);
+    //     if (!code) return;
+    //     setProject(code);
+    // }
 
     const onChatProject = async (prompt: string) => {
         setIsSendingMessage(true);
-        const project = await chatProject(props.projectId, prompt, model);
+        const project = await chatProject(props.projectId, prompt, model ? model : undefined);
         if (!project) return;
         setProject(project);
         setIsSendingMessage(false);
@@ -85,6 +86,12 @@ export const Project = (
         setIsSaving(false);
     }
 
+    const changeChatModel = async (model: Models) => {
+        setModel(model);
+        await API.saveProject(projectId, {
+            chatModel: model
+        });
+    }
 
     useEffect(() => {
         const fetchProject = async () => {
@@ -96,7 +103,14 @@ export const Project = (
         fetchProject();
     }, [props.projectId]);
 
-    if (!project) return (
+    useEffect(() => {
+        if (project) {
+            console.log(project.models.chatModel);
+            setModel(project.models.chatModel);
+        }
+    }, [project])
+
+    if (!project || !model) return (
         <Spin tip="loading your project.. 🧑‍💻">
             <div className="h-screen w-full"></div>
         </Spin>
@@ -112,11 +126,11 @@ export const Project = (
                 isSendingMessage={isSendingMessage}
                 models={models}
                 model={model}
-                setModel={setModel}
+                setModel={changeChatModel}
             />
-            <PromptForm
+            {/* <PromptForm
                 onPromptProject={onPromptProject}
-            />
+            /> */}
             <div className="grow">
                 <ProjectView
                     code={project?.sourceCode || ""}

@@ -38,11 +38,15 @@ export const PUT = async (req: NextRequest) => {
   }
 
   const project = await getProject(projectID);
-  const { content } = await req.json();
+  const { content, chatModel } = await req.json();
 
-  project.setSourceCode(content);
+  if (content) {
+    project.setSourceCode(content);
+  }
 
-  console.log(project.toObject());
+  if (chatModel) {
+    project.setChatModel(chatModel);
+  }
 
   await saveProject(project);
 

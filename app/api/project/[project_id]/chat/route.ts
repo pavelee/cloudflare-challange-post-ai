@@ -13,8 +13,6 @@ export const POST = async (request: NextRequest, props: Props) => {
   const { project_id } = props.params;
   const { prompt, model } = await request.json();
 
-  console.log(model);
-
   const project = await chatProject(project_id, prompt, model);
 
   return NextResponse.json(project.toObject());

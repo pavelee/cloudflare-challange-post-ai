@@ -1,16 +1,15 @@
+import { ProjectType } from "../_model/Project";
 import { Models } from "../action/askAI";
 
 type getProjectIn = {
   projectId: string;
 };
 
-type getProjectOut = {
-  id: string;
-  sourceCode: string;
-};
+type getProjectOut = ProjectType;
 
 type saveProjectIn = {
-  sourceCode: string;
+  sourceCode?: string;
+  chatModel?: Models;
 };
 
 type saveProjectOut = getProjectOut;
@@ -53,7 +52,7 @@ export class API {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ content: data.sourceCode }),
+      body: JSON.stringify(data),
     });
     return response.json();
   }
@@ -69,13 +68,13 @@ export class API {
     return await response.json();
   }
 
-  static async chatProject(projectId: string, prompt: string, model: Models) {
+  static async chatProject(projectId: string, prompt: string, model?: Models) {
     const response = await fetch(`/api/project/${projectId}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt, model }),
+      body: JSON.stringify({ prompt, chatModel: model }),
     });
     return response.json();
   }

@@ -40,7 +40,6 @@ const AIAssistantChat = (
                 </div>
                 <div className="space-y-4 flex flex-col items-center">
                     <Input.TextArea onChange={(value) => {
-                        console.log(value.target.value);
                         setCurrentMessage(value.target.value);
                     }} className="w-full rounded-xl" name="prompt" placeholder="What we do next?"></Input.TextArea>
                     <Button onClick={() => { onPromptProject(currentMessage) }} type="primary">send</Button>
