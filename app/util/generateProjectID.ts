@@ -5,5 +5,6 @@ export const generateProjectID = (projectName: string) => {
   const cleanedProjectName = projectName.replace(/[^a-zA-Z0-9]/g, "");
   const projectID = `${cleanedProjectName}-${salt}`;
   const hasedProjectID = Buffer.from(projectID).toString("base64");
-  return hasedProjectID;
+  const encodedProjectID = encodeURIComponent(hasedProjectID);
+  return encodedProjectID;
 };
