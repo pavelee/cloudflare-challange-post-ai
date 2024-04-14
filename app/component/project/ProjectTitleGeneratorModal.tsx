@@ -15,7 +15,7 @@ export const ProjectTitleGeneratorModal = (
 ) => {
     const { title, projectId, content } = props;
 
-    const [isModalVisible, setIsModalVisible] = useState(true);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     return (
         <>
             <Modal
