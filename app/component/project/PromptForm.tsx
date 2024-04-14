@@ -72,6 +72,8 @@ export const PromptForm = (props: PromptFormProps) => {
         onPromptProject(value);
     }
 
+    return null;
+
     return (
         <div>
             <FloatButton.Group shape="circle" style={{ right: 24 }}>

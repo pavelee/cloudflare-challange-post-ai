@@ -5,6 +5,7 @@ import { ProjectView } from "./ProjectView";
 import { PromptForm } from "./PromptForm";
 import { useEffect, useState } from "react";
 import { AIAssistantChat } from "./AIConsultantChat";
+import { FloatButton } from "antd";
 
 type ProjectProps = {
     projectId: string;
@@ -41,6 +42,14 @@ export const Project = (
     const [isAIConsultantChatOpen, setIsAIConsultantChatOpen] = useState(true);
     const [isSendingMessage, setIsSendingMessage] = useState(false);
 
+    const openAIConsultantChat = () => {
+        setIsAIConsultantChatOpen(true);
+    }
+
+    const closeAIConsultantChat = () => {
+        setIsAIConsultantChatOpen(false);
+    }
+
     const onPromptProject = async (prompt: string) => {
         const code = await promptProject(props.projectId, prompt);
         if (!code) return;
@@ -71,10 +80,13 @@ export const Project = (
 
     return (
         <div className="min-h-screen flex flex-col">
+            <FloatButton.Group shape="circle" style={{ right: 24 }}>
+                <FloatButton type="primary" onClick={openAIConsultantChat} />
+            </FloatButton.Group>
             <AIAssistantChat
                 messages={project?.messages || []}
                 isOpen={isAIConsultantChatOpen}
-                onClose={() => setIsAIConsultantChatOpen(false)}
+                onClose={closeAIConsultantChat}
                 onChatProject={onChatProject}
                 isSendingMessage={isSendingMessage}
             />
