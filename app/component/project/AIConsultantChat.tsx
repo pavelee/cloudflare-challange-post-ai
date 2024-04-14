@@ -3,7 +3,7 @@
 import { MessageType } from "@/app/_model/Message";
 import { Button, Drawer, Form, Input, Select } from "antd";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MarkdownAdapter } from "../MarkdownAdapter";
 import { Models } from "@/app/action/askAI";
 
@@ -93,8 +93,16 @@ const ModelSelector = (props: ModelSelectorProps) => {
 export const AIAssistantChat = (
     props: AIAssistantChatProps
 ) => {
+    const messagesEndRef = useRef(null);
     const [currentMessage, setCurrentMessage] = useState<string>("");
     const { messages, onClose, isOpen, onChatProject, isSendingMessage, model, models, setModel } = props;
+
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            const element = messagesEndRef.current as HTMLElement
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [messages]);
 
     return (
         <Drawer title="AI assistant" open={isOpen} onClose={onClose}>
@@ -112,6 +120,7 @@ export const AIAssistantChat = (
                             <Message key={index} {...message} />
                         ))
                     }
+                    <div ref={messagesEndRef} />
                 </div>
                 <div className="space-y-4 flex flex-col items-center">
                     <Input.TextArea
