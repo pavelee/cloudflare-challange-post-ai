@@ -55,10 +55,15 @@ export const ProjectView = (
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const [switchToPreviewAfterSave, setSwitchToPreviewAfterSave] = useState<boolean>(true);
     const [isSaving, setIsSaving] = useState<boolean>(false);
+    const [haveAnyChanges, setHaveAnyChanges] = useState<boolean>(false);
 
     useEffect(() => {
         setContent(code);
     }, [code]);
+
+    useEffect(() => {
+        setHaveAnyChanges(content != code);
+    }, [content, code]);
 
     const saveProject = async () => {
         setIsSaving(true);
@@ -96,6 +101,7 @@ export const ProjectView = (
                                     loading={isSaving}
                                     type="default"
                                     onClick={saveProject}
+                                    className={`${haveAnyChanges ? "animate-pulse" : ""}`}
                                 >
                                     Save
                                 </Button>
@@ -120,26 +126,4 @@ export const ProjectView = (
             </div>
         </div>
     )
-
-    return (
-        <div>
-            <div
-                className="hover:outline hover:cursor-pointer"
-                dangerouslySetInnerHTML={{ __html: code }}
-            ></div>
-        </div>
-    )
-
-    return (
-        <div className="space-y-5 border p-5 h-full">
-            <p className="text-gray-500">{props.projectId}</p>
-            <div
-                className="border p-5"
-                dangerouslySetInnerHTML={{ __html: code }}
-            ></div>
-            <pre className="border p-5 bg-gray-100">
-                <code className="text-sm font-mono">{code}</code>
-            </pre>
-        </div>
-    );
 }
