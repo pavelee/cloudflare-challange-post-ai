@@ -7,7 +7,7 @@ type Models =
   | "@hf/thebloke/deepseek-coder-6.7b-base-awq"
   | "@hf/thebloke/openhermes-2.5-mistral-7b-awq";
 
-export const askAI = async (prompt: string, model: Models = defaultModel) => {
+export const askAI = async (prompt: any, model: Models = defaultModel) => {
   const cloudfrareKey = process.env.CLOUDFLARE_API_KEY;
   const cfAccountId = process.env.CLOUDFLARE_ACCOUNT_ID;
 
@@ -16,17 +16,21 @@ export const askAI = async (prompt: string, model: Models = defaultModel) => {
     prompt: prompt,
   };
 
+  // @TODO FIX IT
+  const p = prompt;
+
   const req = await fetch(
     `https://api.cloudflare.com/client/v4/accounts/${cfAccountId}/ai/run/${model}`,
     {
       method: "POST",
-      body: JSON.stringify(input),
+      body: JSON.stringify(p),
       headers: {
         Authorization: `Bearer ${cloudfrareKey}`,
       },
     }
   );
   const res = await req.json();
+  console.log(res);
   const response = res.result.response;
 
   return response;
