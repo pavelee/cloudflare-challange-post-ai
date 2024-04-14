@@ -66,4 +66,15 @@ export class API {
     });
     return await response.json();
   }
+
+  static async chatProject(projectId: string, prompt: string) {
+    const response = await fetch(`/api/project/${projectId}/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt }),
+    });
+    return response.json();
+  }
 }

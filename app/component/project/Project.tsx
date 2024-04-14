@@ -30,16 +30,29 @@ const promptProject = async (projectId: string, prompt: string) => {
     return code.code;
 }
 
+const chatProject = async (projectId: string, prompt: string) => {
+    return await API.chatProject(projectId, prompt);
+}
+
 export const Project = (
     props: ProjectProps
 ) => {
     const [project, setProject] = useState<any | null>(null);
     const [isAIConsultantChatOpen, setIsAIConsultantChatOpen] = useState(true);
+    const [isSendingMessage, setIsSendingMessage] = useState(false);
 
     const onPromptProject = async (prompt: string) => {
         const code = await promptProject(props.projectId, prompt);
         if (!code) return;
         setProject(code);
+    }
+
+    const onChatProject = async (prompt: string) => {
+        setIsSendingMessage(true);
+        const project = await chatProject(props.projectId, prompt);
+        if (!project) return;
+        setProject(project);
+        setIsSendingMessage(false);
     }
 
     useEffect(() => {
@@ -62,6 +75,8 @@ export const Project = (
                 messages={project?.messages || []}
                 isOpen={isAIConsultantChatOpen}
                 onClose={() => setIsAIConsultantChatOpen(false)}
+                onChatProject={onChatProject}
+                isSendingMessage={isSendingMessage}
             />
             <PromptForm
                 onPromptProject={onPromptProject}
