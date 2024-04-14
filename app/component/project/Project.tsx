@@ -5,7 +5,7 @@ import { ProjectView } from "./ProjectView";
 import { PromptForm } from "./PromptForm";
 import { useEffect, useState } from "react";
 import { AIAssistantChat } from "./AIConsultantChat";
-import { FloatButton } from "antd";
+import { FloatButton, Spin } from "antd";
 
 type ProjectProps = {
     projectId: string;
@@ -75,7 +75,9 @@ export const Project = (
     }, [props.projectId]);
 
     if (!project) return (
-        <div>Loading...</div>
+        <Spin tip="loading your project.. 🧑‍💻">
+            <div className="h-screen w-full"></div>
+        </Spin>
     );
 
     return (
