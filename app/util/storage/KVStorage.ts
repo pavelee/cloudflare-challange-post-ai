@@ -21,7 +21,7 @@ export class KVStorage<T> implements Storage<T> {
     return data.value;
   }
 
-  public async set(key: string, value: any): Promise<void> {
+  public async set(key: string, value: string): Promise<void> {
     let url = `${this.baseUrl}/accounts/${this.accountId}/storage/kv/namespaces/${this.namespaceId}/values/${key}`;
     const respose = await fetch(url, {
       method: "PUT",
