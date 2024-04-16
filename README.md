@@ -15,3 +15,9 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Storage
+
+By default app is using KV Cloudflare storage, but you can switch to your own!
+
+If you would like to use your own, change exported storage object in `/app/_config/storage.ts`
