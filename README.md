@@ -21,3 +21,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 By default app is using KV Cloudflare storage, but you can switch to your own!
 
 If you would like to use your own, change exported storage object in `/app/_config/storage.ts`
+
+It should impelement interface:
+
+```js
+export interface Storage<T> {
+  get: (key: string) => Promise<T>;
+  set: (key: string, value: string) => Promise<void>;
+  remove: (key: string) => Promise<void>;
+}
+```
